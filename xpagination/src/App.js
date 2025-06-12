@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>{currentPage}</h2>
+      <span>{currentPage}</span>
       <table border="1">
         <thead>
           <tr>
