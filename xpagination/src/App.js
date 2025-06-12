@@ -44,7 +44,6 @@ function App() {
 
   return (
     <div className="App">
-      <span>{currentPage}</span>
       <table border="1">
         <thead>
           <tr>
@@ -66,6 +65,7 @@ function App() {
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={handlePrevious}>Previous</button>
+        <span>{currentPage}</span>
         <button onClick={handleNext}>Next</button>
       </div>
     </div>
