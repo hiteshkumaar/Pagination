@@ -63,11 +63,11 @@ function App() {
         </tbody>
       </table>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={handlePrevious}>Previous</button>
-        <div>{currentPage}</div> 
-        <button onClick={handleNext}>Next</button>
-      </div>
+    <div style={{ marginTop: "20px" }}>
+      <button onClick={handlePrevious}>Previous</button>
+      <p className="page-number">{currentPage}</p> 
+      <button onClick={handleNext}>Next</button>
+    </div>
     </div>
   );
 }
