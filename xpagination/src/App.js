@@ -65,7 +65,7 @@ function App() {
 
     <div style={{ marginTop: "20px" }}>
       <button onClick={handlePrevious}>Previous</button>
-      <p className="page-number">{currentPage}</p> 
+      <p className="page-number"  key={currentPage}>{currentPage}</p> 
       <button onClick={handleNext}>Next</button>
     </div>
     </div>
