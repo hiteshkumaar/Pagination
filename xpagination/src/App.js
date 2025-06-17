@@ -65,7 +65,7 @@ function App() {
 
       <div style={{ marginTop: "20px" }}>
         <button onClick={handlePrevious}>Previous</button>
-        <p>{currentPage}</p> 
+        <div>{currentPage}</div> 
         <button onClick={handleNext}>Next</button>
       </div>
     </div>
