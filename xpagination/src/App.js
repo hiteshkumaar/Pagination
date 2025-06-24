@@ -63,11 +63,18 @@ function App() {
         </tbody>
       </table>
 
-    <div style={{ marginTop: "20px" }}>
-      <button onClick={handlePrevious}>Previous</button>
-      <p className="page-number"  key={currentPage}>{currentPage}</p> 
-      <button onClick={handleNext}>Next</button>
-    </div>
+      <div style={{ marginTop: "20px" }}>
+        {currentPage > 1 && (
+          <button onClick={handlePrevious}>Previous</button>
+        )}
+
+        <span className="page-number" key={currentPage}>{currentPage}</span>
+
+        {currentPage < totalPages && (
+          <button onClick={handleNext}>Next</button>
+        )}
+      </div>
+
     </div>
   );
 }
