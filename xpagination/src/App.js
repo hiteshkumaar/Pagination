@@ -63,13 +63,11 @@ function App() {
         </tbody>
       </table>
 
-      <div style={{ marginTop: "20px" }}>
-        <button onClick={handlePrevious} disabled={currentPage === 1}>Previous</button>
-        <span>{currentPage}</span>
-        <button onClick={handleNext} disabled={currentPage === totalPages}>Next</button>
-
-      </div>
-
+    <div style={{ marginTop: "20px" }}>
+      <button onClick={handlePrevious}>Previous</button>
+      <p>{currentPage}</p> 
+      <button onClick={handleNext}>Next</button>
+    </div>
     </div>
   );
 }
