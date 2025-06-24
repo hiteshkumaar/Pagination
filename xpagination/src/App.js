@@ -1,75 +1,61 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect, useState } from 'react';
 
-function App() {
-  const [employees, setEmployees] = useState([]);
+const API_URL = 'https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json';
+
+const App = () => {
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const EMPLOYEES_PER_PAGE = 10;
+  const itemsPerPage = 10;
 
   useEffect(() => {
-    fetch(
-      "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error("API error");
+    fetch(API_URL)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch data');
         return res.json();
       })
-      .then((data) => setEmployees(data))
-      .catch((error) => {
-        console.error(error);
-        alert("failed to fetch data");
-      });
+      .then(data => setData(data))
+      .catch(() => alert('Failed to fetch data'));
   }, []);
 
-  const indexOfLastEmployee = currentPage * EMPLOYEES_PER_PAGE;
-  const indexOfFirstEmployee = indexOfLastEmployee - EMPLOYEES_PER_PAGE;
-  const currentEmployees = employees.slice(
-    indexOfFirstEmployee,
-    indexOfLastEmployee
-  );
-
-  const totalPages = Math.ceil(employees.length / EMPLOYEES_PER_PAGE);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
-    }
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
+  const currentData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
-    <div className="App">
-      <table border="1">
+    <div>
+      <h2>Page {currentPage}</h2>
+      <table border="1" width="100%">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>ID</th><th>Name</th><th>Email</th><th>Role</th>
           </tr>
         </thead>
         <tbody>
-          {currentEmployees.map((emp) => (
-            <tr key={emp.id}>
-              <td>{emp.name}</td>
-              <td>{emp.email}</td>
-              <td>{emp.role}</td>
+          {currentData.map((item, idx) => (
+            <tr key={item.id || idx}>
+              <td>{item.id}</td><td>{item.name}</td>
+              <td>{item.email}</td><td>{item.role}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-    <div style={{ marginTop: "20px" }}>
-      <button onClick={handlePrevious}>Previous</button>
-      <p>{currentPage}</p> 
-      <button onClick={handleNext}>Next</button>
-    </div>
+      <div style={{ marginTop: '20px' }}>
+        <button onClick={handlePrevious}>Previous</button>
+        <button onClick={handleNext}>Next</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
